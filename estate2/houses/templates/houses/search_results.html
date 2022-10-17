@@ -11,7 +11,7 @@
       <div style="background-color:#4c4c4c;color:white;position:absolute;top:100px;">
   <form style="z-index:1000;display:flex;flex-wrap:wrap;" action="{% url 'search_for' %}">
     {{SearchForm.as_p}}
-    <button id="search_pressed" class="btn btn-success" value="submit" style="width:130px;height:40px;margin:13px 15px;">Search</button>
+    <button id="search_pressed" class="btn btn-danger" value="submit" style="width:130px;height:40px;margin:13px 15px;border:2px solid white;">Search</button>
   </form>
       </div>
 
@@ -112,7 +112,7 @@
                           <span class="bi bi-chevron-right"></span>
                         </a>
                       </div>
-                      <div class="card-footer-a">
+                      <div style="background-color:red;border:2px solid white;" class="card-footer-a">
                         <ul class="card-info d-flex justify-content-around">
                           <li>
                             <h4 class="card-info-title">Area</h4>
@@ -158,13 +158,13 @@
                       </div>
                       <div class="card-body-a">
                         <div class="price-box d-flex">
-                          <span class="price-a btn btn-success">{{house.status}} | $ {{house.price}}.000</span>
+                          <span style="border:2px solid white;" class="price-a btn btn-danger">{{house.status}} | $ {{house.price}}.000</span>
                         </div>
                         <a href="{% url 'single' house.id %}" class="link-a">Click here to view
                           <span class="bi bi-chevron-right"></span>
                         </a>
                       </div>
-                      <div class="card-footer-a">
+                      <div style="background-color:red;border:2px solid white;" class="card-footer-a">
                         <ul class="card-info d-flex justify-content-around">
                           <li>
                             <h4 class="card-info-title">Area</h4>

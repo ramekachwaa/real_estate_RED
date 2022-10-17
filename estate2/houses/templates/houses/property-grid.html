@@ -101,13 +101,13 @@
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a btn btn-success">{% translate house.status %} | $ {{house.price}}.000</span>
+                      <span style="border:2px solid white;" class="price-a btn btn-danger">{% translate house.status %} | $ {{house.price}}.000</span>
                     </div>
                     <a href="{% url 'single' house.id %}" class="link-a">{% translate "Click here to view" %}
                       <span class="bi bi-chevron-right"></span>
                     </a>
                   </div>
-                  <div class="card-footer-a">
+                  <div style="background-color:red;" class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
                         <h4 class="card-info-title">{% translate "Area" %}</h4>

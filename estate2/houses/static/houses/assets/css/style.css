@@ -200,7 +200,7 @@ a:hover {
   color: #000000;
 }
 .pagination-a .pagination .page-link:hover, .pagination-a .pagination .page-link:active, .pagination-a .pagination .page-link:focus {
-  background-color: #2eca6a;
+  background-color: red;
 }
 .pagination-a .pagination .page-link span {
   font-size: 1.2rem;
@@ -375,7 +375,7 @@ hegiht:25px;
   transition: 0.3s;
 }
 .carousel-pagination .swiper-pagination-bullet-active {
-  background-color: #2eca6a;
+  background-color: red;
   width: 25px;
 hegiht:25px;
 }
@@ -880,7 +880,7 @@ hegiht:25px;
   transition: 0.3s;
 }
 .intro .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #2eca6a;
+  background-color: red;
   width: 15px;
 }
 .intro .intro-item {

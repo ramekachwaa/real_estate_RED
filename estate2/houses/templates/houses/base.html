@@ -56,7 +56,7 @@
 <!--
 <a id="msg_me" style="font-size:35px;border-radius:50%;position:fixed;bottom:10px;left:1144px;z-index:2000;" class="bi bi-chat-left-dots btn btn-success" href="{% url 'write_msg' %}"></a>
 -->
-<a style="border-radius:20%;position:fixed;bottom:60px;left:990px;z-index:1010;" class="btn btn-outline-success" href="{% url 'write_msg' %}">Leave a message</a>
+<a style="border-radius:20%;position:fixed;bottom:60px;left:990px;z-index:1010;" class="btn btn-outline-danger" href="{% url 'write_msg' %}">Leave a message</a>
 {% endif %}
 
   <!-- ======= Header/Navbar ======= -->
@@ -67,13 +67,13 @@
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="{% url 'home' %}">Estate<span class="color-b">Agency</span></a>
+      <a class="navbar-brand text-brand" href="{% url 'home' %}">Estate<span style="color:red;" class="color-b">Agency</span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           {% if request.path == "/" %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -83,35 +83,35 @@
 {% if user.is_authenticated %}
             {% if request.path == "/show-all-inquiry" %}
         <li class="nav-item">
-            <a class="nav-link active" href="{% url 'show_all_inquiry' %}">
-              Inquiries(<span style="color:green;">{{request.user.inquiry_set.count}}</span>)
+            <a class="nav-link" href="{% url 'show_all_inquiry' %}">
+              Inquiries(<span style="color:red;">{{request.user.inquiry_set.count}}</span>)
             </a>
           </li>
             {% else %}
             <li class="nav-item">
             <a class="nav-link" href="{% url 'show_all_inquiry' %}">
-              Inquiries(<span style="color:green;">{{request.user.inquiry_set.count}}</span>)
+              Inquiries(<span style="color:red;">{{request.user.inquiry_set.count}}</span>)
             </a>
           </li>
             {% endif %}
 {% if request.user %}
           {% if request.path == "/Profile" %}
           <li class="nav-item">
-            <a class="nav-link active" style="font-weight:400;">
-              Logged in as(<span style="color:green;">{{request.user.username}}</span>)
+            <a class="nav-link" style="font-weight:400;">
+              Logged in as(<span style="color:red;">{{request.user.username}}</span>)
             </a>
           </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link" style="font-weight:400;">
-               Logged in as(<span style="color:green;">{{request.user.username}}</span>)
+               Logged in as(<span style="color:red;">{{request.user.username}}</span>)
             </a>
           </li>
           {% endif %}
 
           {% if request.path == "/messages" %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'messages' %}">Messages({{request.user.message_set.count}})</a>
+            <a class="nav-link" href="{% url 'messages' %}">Messages({{request.user.message_set.count}})</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -127,7 +127,7 @@
 
           {% if request.path == "/userlogin" %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Login" %}</a>
+            <a class="nav-link" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Login" %}</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -137,7 +137,7 @@
 {% endif %}
           {% if request.path == "/about" %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'about' %}">{% translate "About" %}</a>
+            <a class="nav-link" href="{% url 'about' %}">{% translate "About" %}</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -262,7 +262,7 @@
   </footer><!-- End  Footer -->
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#"  class="btn btn-danger back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'houses/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
