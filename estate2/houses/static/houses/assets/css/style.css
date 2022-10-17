@@ -221,7 +221,7 @@ a:hover {
   color: #555555;
 }
 .pagination-a .pagination .page-item.active .page-link {
-  background-color: #2eca6a;
+  background-color: red;
 }
 
 .a {
