@@ -38,6 +38,7 @@
         animation-fill-mode:forwards;
         animation-iteration-count:infinite;
     }
+
     {% block css %}
 
     {% endblock %}
@@ -56,20 +57,23 @@
 <!--
 <a id="msg_me" style="font-size:35px;border-radius:50%;position:fixed;bottom:10px;left:1144px;z-index:2000;" class="bi bi-chat-left-dots btn btn-success" href="{% url 'write_msg' %}"></a>
 -->
-<a style="border-radius:20%;position:fixed;bottom:60px;left:990px;z-index:1010;" class="btn btn-outline-danger" href="{% url 'write_msg' %}">Leave a message</a>
+<a id="leave_a_msg" style="border-radius:20%;position:fixed;bottom:60px;left:990px;z-index:1010;" class="btn btn-outline-danger" href="{% url 'write_msg' %}">Leave a message</a>
 {% endif %}
 
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top" style="height:70px;">
-    <div class="container">
+    <div class="container" style="position:relative;left:0px;">
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="{% url 'home' %}">Estate<span style="color:red;" class="color-b">Agency</span></a>
 
-      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+      <a class="navbar-brand text-brand" style="position:fixed;top:0px;right:0px;" href="{% url 'home' %}">
+          <img style="width:100px;height:50px;" src="{% static 'houses/real_estate_logo.jpg' %}">
+      </a>
+
+      <div style="background-color:white;" class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           {% if request.path == "/" %}
           <li class="nav-item">

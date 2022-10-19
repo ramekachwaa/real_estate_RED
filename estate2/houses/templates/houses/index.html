@@ -35,7 +35,28 @@ float: left;
         animation-iteration-count: infinite;
       }
 
+@media(max-width: 1180px) {
+#div_of_inquiry{width:100%;}
+#inquiry_form{}
+body{width:150%;}
+}
+
 {% endblock %}
+
+<!--
+@media only screen and (max-width: 1180px) {
+  body {
+    background-color: lightblue;
+  }
+  #inquiry_form{
+position:relative;
+    top:50px;left:500px;
+  }
+#inquiry_div{
+  top:0%;
+}
+}
+-->
 
 {% block content %}
   <!-- ======= Intro Section ======= -->
@@ -237,27 +258,17 @@ float: left;
 
   </main><!-- End #main -->
 
-<div style="height:900px;margin:0 auto;text-align:center;position:relative;background-color:red;">
+<div id="div_of_inquiry" style="height:900px;margin:0 auto;text-align:center;position:relative;background-color:red;">
 
-<div style="margin-left:30px;margin-top:-100px;position:absolute;top:18%;left:50%;width:560px;height:700px;background-color:white;border:1px solid red;">
-
-</div>
-<div>
-  <p style="position:absolute;left:5%;top:30%;font-size:25px;color:white;">Why EstateAgency Is The <p style="position:absolute;left:5%;top:34%;font-size:25px;color:white;">Perfect Choice?</p></p>
-
-  <p style="position:absolute;left:5%;top:40%;font-size:25px;color:white;">01. <p style="position:absolute;left:5%;top:44%;font-size:25px;color:white;">Expert Professionals</p></p>
-
-  <p style="position:absolute;left:5%;top:50%;font-size:25px;color:white;">02. <p style="position:absolute;left:5%;top:54%;font-size:25px;color:white;">Data-Backed Advice</p></p>
-
-  <p style="position:absolute;left:5%;top:60%;font-size:25px;color:white;">03. <p style="position:absolute;left:5%;top:64%;font-size:25px;color:white;">Customer Experience</p></p>
-
+<div style="margin-top:-100px;position:absolute;top:18%;width:560px;left:3%;height:700px;background-color:white;border:1px solid red;">
 
 </div>
-<h3 style="text-align:right;position:absolute;top:10%;left:60%;">Estate<span style="color:red;">Agency</span> Inquiry Form</h3>
-<h6 style="text-align:right;position:absolute;top:15%;left:60%;;">Have questions? Do not hesitate to contact us.</h6>
+
+<h3 style="text-align:right;position:absolute;top:10%;left:6%">Estate<span style="color:red;">Agency</span> Inquiry Form</h3>
+<h6 style="text-align:right;position:absolute;top:15%;left:6%">Have questions? Do not hesitate to contact us.</h6>
 
 
-  <form action="{% url 'get_inquiry' %}" style="position:absolute;top:18%;left:50%;">
+  <form id="inquiry_form" action="{% url 'get_inquiry' %}" style="position:absolute;top:18%;left:3%">
     {{inquiry_form.as_p}}
         <button id="inquiry" class="btn btn-danger" value="submit" style="border:2px solid white;width:210%;height:40px;margin:13px 48%;">Submit</button>
   </form>
