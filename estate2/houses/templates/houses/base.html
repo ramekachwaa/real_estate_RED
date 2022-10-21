@@ -76,7 +76,7 @@
       <div style="background-color:white;" class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           {% if request.path == "/" %}
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           {% else %}
@@ -86,7 +86,7 @@
           {% endif %}
 {% if user.is_authenticated %}
             {% if request.path == "/show-all-inquiry" %}
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="{% url 'show_all_inquiry' %}">
               Inquiries(<span style="color:red;">{{request.user.inquiry_set.count}}</span>)
             </a>
@@ -100,7 +100,7 @@
             {% endif %}
 {% if request.user %}
           {% if request.path == "/Profile" %}
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" style="font-weight:400;">
               Logged in as(<span style="color:red;">{{request.user.username}}</span>)
             </a>
@@ -114,12 +114,12 @@
           {% endif %}
 
           {% if request.path == "/messages" %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'messages' %}">Messages({{request.user.message_set.count}})</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'messages' %}">Messages(<span style="color:red;">{{request.user.message_set.count}}</span>)</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'messages' %}">Messages({{request.user.message_set.count}})</a>
+            <a class="nav-link" href="{% url 'messages' %}">Messages(<span style="color:red;">{{request.user.message_set.count}}</span>)</a>
           </li>
           {% endif %}
 {% endif %}
@@ -130,7 +130,7 @@
 {% else %}
 
           {% if request.path == "/userlogin" %}
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Login" %}</a>
           </li>
           {% else %}
@@ -140,7 +140,7 @@
           {% endif %}
 {% endif %}
           {% if request.path == "/about" %}
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'about' %}">{% translate "About" %}</a>
           </li>
           {% else %}
@@ -153,6 +153,8 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% translate "Pages" %}</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="{% url 'properties' %}">{% translate "Properties" %}</a>
+              <a class="dropdown-item " href="{% url 'show_all_projects' %}">Projects</a>
+              <a class="dropdown-item " href="{% url 'show_all_companies' %}">Companies</a>
             </div>
           </li>
         <!--

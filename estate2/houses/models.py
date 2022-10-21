@@ -87,8 +87,31 @@ class House(models.Model):
     #agent = models.ForeignKey(Agent,on_delete=models.CASCADE,verbose_name=_("agent"))
     description = models.TextField(_("description"),)
     amenities = models.ManyToManyField(Amenity,verbose_name=_("amenities"))
+    company = models.ForeignKey('Company',on_delete=models.CASCADE,blank=True,null=True)
+    project = models.ForeignKey('Project',on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
         return f"House ({self.id})==>{self.price}EGP"
+
+
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=500)
+    location = models.CharField(max_length=500,choices=choices3,default='Ain Shokana')
+    logo = models.ImageField(upload_to="images",default='houses/real_estate_logo.jpg')
+    def __str__(self):
+        return f"{self.name}"
+
+class Project(models.Model):
+    name = models.CharField(max_length=500)
+    company = models.ForeignKey(Company,on_delete=models.CASCADE,null=True,blank=True)
+    type = models.CharField(max_length=50, choices=choices2, default="Apartment")
+    location = models.CharField(max_length=500, choices=choices3,default='Ain Shokana')
+    number_of_units = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.name}"
+
 
 
 class Message(models.Model):
@@ -98,6 +121,8 @@ class Message(models.Model):
     #agent = models.ForeignKey(Agent,on_delete=models.CASCADE,verbose_name=_("agent"),null=True,blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    phone_number = models.CharField(max_length=30,null=True,blank=True)
+    project = models.ForeignKey(Project,on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
         return f"message from agent({self.user_name})"
 

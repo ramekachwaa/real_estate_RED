@@ -1,4 +1,4 @@
-from .models import House,Message,Inquiry
+from .models import House,Message,Inquiry,Project,Company
 from django import forms
 
 class HouseForm(forms.ModelForm):
@@ -59,12 +59,12 @@ class HouseForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['user_name','email','content']
+        fields = ['user_name','email','phone_number','project','content']
     def __init__(self,*args,**kwargs):
         super(MessageForm,self).__init__(*args,**kwargs)
         self.fields["user_name"].widget.attrs.update({'class': 'form-control'})
         self.fields["user_name"].widget.attrs.update({'style': 'width:100%;'})
-        self.fields["user_name"].widget.attrs.update({'placeholder': 'User Name *'})
+        self.fields["user_name"].widget.attrs.update({'placeholder': 'Client Name *'})
 
         self.fields["content"].widget.attrs.update({'class': 'form-control'})
         self.fields["content"].widget.attrs.update({'style': 'width:100%;'})
@@ -73,6 +73,14 @@ class MessageForm(forms.ModelForm):
         self.fields["email"].widget.attrs.update({'class': 'form-control'})
         self.fields["email"].widget.attrs.update({'style': 'width:100%;'})
         self.fields["email"].widget.attrs.update({'placeholder': 'email *'})
+
+        self.fields["phone_number"].widget.attrs.update({'class': 'form-control'})
+        self.fields["phone_number"].widget.attrs.update({'style': 'width:100%;'})
+        self.fields["phone_number"].widget.attrs.update({'placeholder': 'Phone Number *'})
+
+        self.fields["project"].widget.attrs.update({'class': 'form-control'})
+        self.fields["project"].widget.attrs.update({'style': 'width:100%;'})
+        self.fields["project"].widget.attrs.update({'placeholder': 'Phone Number *'})
 
 
 
@@ -247,5 +255,51 @@ class InquiryForm(forms.ModelForm):
         self.fields["bathrooms"].widget.attrs.update({'style': 'position:absolute;top:433px;left:220px;margin:0 48%;width:200px;height:50px;'})
         self.fields["bathrooms"].widget.attrs.update({'placeholder': 'Number of baths'})
         self.fields['bathrooms'].label = ""
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = "__all__"
+        exclude =('number_of_units',)
+    def __init__(self,*args,**kwargs):
+        super(ProjectForm,self).__init__(*args,**kwargs)
+        self.fields["name"].widget.attrs.update({'class': 'form-control'})
+        self.fields["name"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["name"].widget.attrs.update({'placeholder': 'Project name'})
+        self.fields['name'].label = "Name"
+
+        self.fields["company"].widget.attrs.update({'class': 'form-control'})
+        self.fields["company"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["company"].widget.attrs.update({'placeholder': 'company name'})
+        self.fields['company'].label = "company"
+
+        self.fields["type"].widget.attrs.update({'class': 'form-control'})
+        self.fields["type"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["type"].widget.attrs.update({'placeholder': 'project type'})
+        self.fields['type'].label = "type"
+
+        self.fields["location"].widget.attrs.update({'class': 'form-control'})
+        self.fields["location"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["location"].widget.attrs.update({'placeholder': 'project location'})
+        self.fields['location'].label = "location"
+
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = "__all__"
+    def __init__(self,*args,**kwargs):
+        super(CompanyForm,self).__init__(*args,**kwargs)
+        self.fields["name"].widget.attrs.update({'class': 'form-control'})
+        self.fields["name"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["name"].widget.attrs.update({'placeholder': 'Company name'})
+        self.fields['name'].label = "Name"
+
+
+        self.fields["location"].widget.attrs.update({'class': 'form-control'})
+        self.fields["location"].widget.attrs.update({'style': 'width:30%;margin:0 48%;'})
+        self.fields["location"].widget.attrs.update({'placeholder': 'Company location'})
+        self.fields['location'].label = "location"
 
 

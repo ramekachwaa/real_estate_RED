@@ -29,4 +29,13 @@ urlpatterns = [
 
     path('show-place/<str:place>', views.show_place,name="show_place"),
     path('show-type/<str:type_of_place>', views.show_type,name="show_type"),
+
+    path('show_all_projects', views.show_all_projects,name="show_all_projects"),
+    path('show_all_companies', views.show_all_companies,name="show_all_companies"),
+
+    path('show_single_company/<int:id>', views.show_single_company,name="show_single_company"),
+    path('show_single_project/<int:id>', views.show_single_project,name="show_single_project"),
+
+    path('add_project', views.add_project,name="add_project"),
+    path('add_company', views.add_company,name="add_company"),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from .models import Amenity,House,Message,Image_of_house,Inquiry
-from .forms import HouseForm,SearchForm,MessageForm,InquiryForm
+from .models import Amenity,House,Message,Image_of_house,Inquiry,Project,Company
+from .forms import HouseForm,SearchForm,MessageForm,InquiryForm,ProjectForm,CompanyForm
 from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView,DeleteView
@@ -182,6 +182,56 @@ def show_all_inquiry(request):
     context = {"all_inqures":all_inqures}
     return render(request,'houses/show_all_inquiry.html',context)
 
+def show_all_projects(request):#Project,Company
+    form = ProjectForm()
+    all_projects = Project.objects.all()
+    context = {"all_projects":all_projects,
+               "form":form}
+    return render(request,'houses/show_projects.html',context)
+
+def add_project(request):
+    form = ProjectForm()
+    if request.method == "POST":
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show_all_projects')
+    context = {"form":form}
+    return render(request,'houses/add_project.html',context)
+
+def add_company(request):
+    form = CompanyForm()
+    if request.method == "POST":
+        form = CompanyForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('show_all_companies')
+    context = {"form": form}
+    return render(request, 'houses/add_company.html', context)
+def show_all_companies(request):
+    all_companies = Company.objects.all()
+    context = {"all_companies":all_companies}
+    return render(request,'houses/show_companies.html',context)
+
+def show_single_company(request,id):
+    company = Company.objects.get(pk=id)
+    houses = House.objects.all()
+    all_houses = []
+    for house in houses:
+        if house.company == company:
+            all_houses.append(house)
+    context = {"all_houses":all_houses}
+    return render(request,'houses/show_single_company.html',context)
+
+def show_single_project(request,id):
+    project = Project.objects.get(pk=id)
+    houses = House.objects.all()
+    all_houses = []
+    for house in houses:
+        if house.project == project:
+            all_houses.append(house)
+    context = {"all_houses":all_houses}
+    return render(request,'houses/show_single_company.html',context)
 
 """
 class SearchView(ListView):
