@@ -98,6 +98,7 @@
             </a>
           </li>
             {% endif %}
+ <!--
 {% if request.user %}
           {% if request.path == "/Profile" %}
           <li class="nav-item active">
@@ -112,7 +113,7 @@
             </a>
           </li>
           {% endif %}
-
+-->
           {% if request.path == "/messages" %}
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'messages' %}">Messages(<span style="color:red;">{{request.user.message_set.count}}</span>)</a>
@@ -123,21 +124,6 @@
           </li>
           {% endif %}
 {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'userlogout' %}">Log Out</a>
-          </li>
-
-{% else %}
-
-          {% if request.path == "/userlogin" %}
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Login" %}</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Login" %}</a>
-          </li>
-          {% endif %}
 {% endif %}
           {% if request.path == "/about" %}
           <li class="nav-item active">

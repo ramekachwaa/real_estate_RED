@@ -76,10 +76,14 @@ position:relative;
                   <div class="intro-body" >
                     <a href="{% url 'single' house.id %}">
                     <h1 class="intro-title mb-4 " >
-                      <span style="color:red;" class="color-b">{{house.type}} </span> in {{house.location}}
+                      <span style="color:red;" class="color-b">{{house.project}} -- </span>{{house.type}} in {{house.location}}
                       <br> {{house.address}}
+
                     </h1>
                     </a>
+                    <!--
+                    <a href="{% url 'show_single_company' house.company.id %}"><span style="color:white;"><img style="width:50px;height:50px;" src="{{house.company.logo.url}}">{{house.company}}  ({{house.project}})</span></a>
+                    -->
                     <p class="intro-subtitle intro-price" >
                       <a href="{% url 'single' house.id %}"><span style="border:2px solid white;" class="price-a btn btn-danger">{{house.status}} | $ {{house.price}}.000</span></a>
                     </p>
@@ -193,9 +197,10 @@ position:relative;
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="{% url 'single' house.id %}">{{house.location}}
+                        <a href="{% url 'single' house.id %}"><span style="color:red;">{{house.project}}</span>--{{house.location}}
                           <br /> {{house.address}}</a>
                       </h2>
+
                     </div>
                     <div  class="card-body-a">
                       <div  class="price-box d-flex">
@@ -225,6 +230,12 @@ position:relative;
                           <h4 class="card-info-title">Garages</h4>
                           <span>{{house.garages}}</span>
                         </li>
+
+                        <li>
+                          <h4 class="card-info-title">Company</h4>
+                          <a href="{% url 'show_single_company' house.company.id %}"><span style="color:white;"><img style="position:absolute;right:20px;top:30px;width:50px;height:30px;" src="{{house.company.logo.url}}"></span></a>
+                        </li>
+
                       </ul>
                     </div>
                   </div>

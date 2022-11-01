@@ -212,25 +212,86 @@ def show_all_companies(request):
     all_companies = Company.objects.all()
     context = {"all_companies":all_companies}
     return render(request,'houses/show_companies.html',context)
-
+###########################################################################
 def show_single_company(request,id):
+    order_index = 0
+    if request.method == "POST":
+        order_index = request.POST["order_by"]
+    else:
+        order_index = request.GET.get("order_by")
     company = Company.objects.get(pk=id)
     houses = House.objects.all()
+    all_houses_old = houses
+    try:
+        if order_index == "1":
+            all_houses_old = all_houses_old.order_by("price")
+            print("              1")
+        if order_index == "2":
+            all_houses_old = all_houses_old.order_by("-price")
+            print("              2")
+        if order_index == "3":
+            all_houses_old = all_houses_old.order_by("area")
+            print("              3")
+        if order_index == "4":
+            all_houses_old = all_houses_old.order_by("-area")
+            print("              4")
+        if order_index == "0":
+            pass
+    except Exception as inst:
+        print("order_index does not exist yet")
+        print(inst)
     all_houses = []
-    for house in houses:
+    for house in all_houses_old:
         if house.company == company:
             all_houses.append(house)
-    context = {"all_houses":all_houses}
+    paginator = Paginator(all_houses, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"all_houses":all_houses,
+               "order_value":order_index,
+               "company":company,
+               "page_obj":page_obj}
     return render(request,'houses/show_single_company.html',context)
 
 def show_single_project(request,id):
+    order_index = 0
+    if request.method == "POST":
+        order_index = request.POST["order_by"]
+    else:
+        order_index = request.GET.get("order_by")
     project = Project.objects.get(pk=id)
     houses = House.objects.all()
+    all_houses_old = houses
+    try:
+        if order_index == "1":
+            all_houses_old = all_houses_old.order_by("price")
+            print("              1")
+        if order_index == "2":
+            all_houses_old = all_houses_old.order_by("-price")
+            print("              2")
+        if order_index == "3":
+            all_houses_old = all_houses_old.order_by("area")
+            print("              3")
+        if order_index == "4":
+            all_houses_old = all_houses_old.order_by("-area")
+            print("              4")
+        if order_index == "0":
+            pass
+    except Exception as inst:
+        print("order_index does not exist yet")
+        print(inst)
     all_houses = []
-    for house in houses:
+    for house in all_houses_old:
         if house.project == project:
             all_houses.append(house)
-    context = {"all_houses":all_houses}
+    paginator = Paginator(all_houses, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"all_houses":all_houses,
+               "order_value":order_index,
+               "page_obj":page_obj}
     return render(request,'houses/show_single_company.html',context)
 
 """
@@ -270,16 +331,16 @@ def write_msg(request):
 
 def single(request,id):
     single_house = House.objects.get(id=id)
+    form = MessageForm()
     if request.method=="POST":
         print("##########################")
         print(request.POST)
-        name = request.POST["name"]
-        email = request.POST["email"]
-        message = request.POST["message"]
-        new_msg = Message(user_name=name,content=message,email=email)
-        new_msg.save()
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
-    context = {"house":single_house}
+    context = {"house":single_house,
+               "form":form}
     return render(request,"houses/property-single.html",context)
 
 #######################
@@ -320,16 +381,13 @@ def about(request):
 
 
 def userlogin(request):
-    prev_link = request.GET["next"]
-    print("++++++++++++++++++")
-    print(prev_link)
     if request.method=="POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect(prev_link)
+            return redirect('home')
         else:
             pass
     return render(request,"houses/login.html")
@@ -422,7 +480,7 @@ def show_place(request,place):
     for house in all_houses:
         if house.location == place:
             all_in_place.append(house)
-    paginator = Paginator(all_in_place, 3)
+    paginator = Paginator(all_in_place, 6)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -453,7 +511,7 @@ def show_type(request,type_of_place):
     for house in all_houses:
         if house.type == type_of_place:
             all_in_place.append(house)
-    paginator = Paginator(all_in_place, 3)
+    paginator = Paginator(all_in_place, 6)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

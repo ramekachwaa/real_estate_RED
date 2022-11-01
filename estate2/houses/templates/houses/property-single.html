@@ -35,23 +35,6 @@
               </ol>
             </nav>
           </div>
-   {% else %}
-          <div class="col-md-12 col-lg-4">
-
-            <h2 style="font-size:25px;">({% translate "Please" %} <a style="color:green;text-decoration:underline;" href="{% url 'userlogin' %}?next={{request.path}}">{% translate "Log in" %}</a> {% translate "to edit" %})</h2>
-
-            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
-
-              <ol class="breadcrumb">
-                <li style="margin:0 20px;">
-                  <a class="btn btn-lg btn-primary disabled" href="{% url 'update_property' house.id %}" role="button">{% translate "Edit" %}</a>
-                </li>
-                <li>
-                  <a class="btn btn-lg btn-danger disabled" href="{% url 'delete_property' house.id %}" role="button">{% translate "Delete" %}</a>
-                </li>
-              </ol>
-            </nav>
-          </div>
    {% endif %}
         </div>
       </div>
@@ -146,6 +129,16 @@
                         <strong>{% translate "Garages" %}:</strong>
                         <span>{{house.garages}}</span>
                       </li>
+
+                      <li class="d-flex justify-content-between">
+                        <strong>Project:</strong>
+                        <span>{{house.project}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>Company:</strong>
+                        <span>{{house.company}}</span>
+                      </li>
+
                     </ul>
                   </div>
 
@@ -210,29 +203,13 @@
 
 
 
-                  <form class="form-a" method="POST">
-                    {% csrf_token %}
-                    <div class="row">
-                      <div class="col-md-12 mb-1">
-                        <div class="form-group">
-                          <input type="text" class="form-control form-control-lg form-control-a" name="name" id="inputName" placeholder="{% translate 'user name' %} *" required>
-                        </div>
-                      </div>
-                      <div class="col-md-12 mb-1">
-                        <div class="form-group">
-                          <input type="email" class="form-control form-control-lg form-control-a" name="email" id="inputEmail1" placeholder="{% translate 'email' %} *" required>
-                        </div>
-                      </div>
-                      <div class="col-md-12 mb-1">
-                        <div class="form-group">
-                          <textarea id="textMessage" class="form-control" placeholder="{% translate 'content' %} *" name="message" cols="45" rows="8" required></textarea>
-                        </div>
-                      </div>
-                      <div class="col-md-12 mt-3">
-                        <button type="submit" class="btn btn-a">{% translate 'Send Message' %}</button>
-                      </div>
-                    </div>
-                  </form>
+                  <div style="display:flex;justify-content:center;align-items:center;">
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button value="submit" style="position:absolute;left:45%;width:130px;height:40px;margin:13px 15px;">Submit</button>
+  </form>
+</div>
 
 
 
